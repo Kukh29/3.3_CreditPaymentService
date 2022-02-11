@@ -1,9 +1,10 @@
 public class CreditPaymentService {
-    public float calculate(float amount, float month) {
-        float mp = 1_000_000*999/100/100/12; // ежемесечная процентная ставка
-        float payment = (float) (amount * (mp/(1-(1+mp)*(1-month))));
+    public float calculate(int amount, int month, double percent) {
+        double mp = percent/100/12; // ежемесечная процентная ставка
+        double pow = Math.pow (1+mp,month);
+        double payment = (amount * (mp+(mp/(pow-1))));
 
-        return payment;
+        return (float) payment;
     }
 }
 
